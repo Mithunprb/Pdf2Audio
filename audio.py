@@ -1,0 +1,226 @@
+#!usr/bin/python
+from tkinter import *
+from tkinter import ttk
+import PyPDF2
+import os
+import pyttsx3
+from tkinter import filedialog
+from gtts import gTTS, tts
+
+root = Tk()
+root.title("PDF to Audio")
+
+icon = PhotoImage(file='icon.png')
+root.iconphoto(False, icon)
+
+def switch():
+	
+  my_notebook.select(1)
+
+def switch1():
+
+  my_notebook.select(2)
+
+def switch2():
+
+  my_notebook.select(0)
+
+my_notebook = ttk.Notebook(root)
+my_notebook.pack(pady=15)
+
+my_frame1 = Frame(my_notebook, width=500, height=500, bg="#4a8577")
+my_frame2 = Frame(my_notebook, width=500, height=500)
+my_frame3 = Frame(my_notebook, width=500, height=500, bg="lightgrey")
+
+my_notebook.add(my_frame1, text="1st Tab")
+my_notebook.add(my_frame2, text="2nd Tab")
+my_notebook.add(my_frame3, text="3rd Tab")
+
+canvas = Canvas(my_frame1, bg="#4a8577", bd=0, highlightthickness=0)
+
+photo = PhotoImage(file="download.png")
+                                                   #
+lbl = Label(my_frame1, image=photo, bg="#4a8577")
+lbl.place(relx=0.5, rely=0.39, anchor='center')
+
+canvas.create_text(200, 100, text=" PDF TO AUDIO ",anchor='center', fill="#0f1020", font=("Times New Roman", 25, "bold"))
+canvas.pack()
+
+def sel():
+	print("You selected " + str(var.get()))
+
+
+langs = {'English':'en', 'Hindi':'hi-IN', 'French':'fr-FR','Italian':'it-IT','Japanese':'ja-JP','Kannada':'kn-IN','Malyalam':'ml-IN','Spanish':'es-US'}
+var = StringVar(value="1")
+
+for  k,v in langs.items():
+
+	print(v)
+	button_R = Radiobutton(my_frame1,text=k,value=v, variable=var, bg='#4a8577',command=sel)
+	button_R.pack(anchor=W)
+	
+	button_R1 = Radiobutton(my_frame3,text=k,value=v, variable=var, bg='lightgrey',command=sel)
+	button_R1.pack(anchor=W)
+
+
+q=Label(my_frame1, text="Destination folder : ", bg="#4a8577").place(x=150, y=350)
+
+e2 = StringVar()
+e2 = Entry(my_frame1)
+
+e2.insert(0,"pdf.mp3")
+e2.place(x=280, y=350)
+
+qpath = str(e2.get())
+
+
+def audio_maker():
+
+    filename = filedialog.askopenfilename(initialdir="E:\Mithun\Programming\Python\Tkinter\redpdf",
+                                          title="Select a File",
+                                          filetypes=(("Text files",
+                                                      "*.pdf*"),
+                                                     ("all files",
+                                                      "*.*")))
+    print(filename)
+    pdfFileObj = open(filename, "rb")
+    pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
+
+    mytext = ""
+
+    for pageNum in range(pdfReader.numPages):
+
+        pageObj = pdfReader.getPage(pageNum)
+
+        mytext += pageObj.extractText()
+
+        myobj1 = gTTS(text=mytext, lang=str(var.get()))
+        myobj1.save(qpath)
+        os.system(qpath)
+
+    pdfFileObj.close()
+
+btn2 = Button(my_frame1,text="Pdf to audio", width="15", command=audio_maker)
+btn2.place(x=200, y=270)
+
+            # From here Tab2 code
+            # Create a textbox
+my_text = Text(my_frame2, height=30, width=60)
+my_text.pack(pady=10)
+my_text.insert(1.0,"Extract your PDF here!!")
+
+                                      # Clear the textbox
+def clear_text_box():
+
+  my_text.delete(1.0, END)
+
+                                        # Open our pdf file
+def open_pdf():
+
+                                        # Grab the filename of the pdf file
+  global open_file
+  open_file = filedialog.askopenfilename(
+    initialdir="E:\Mithun\Programming\Python\Tkinter\redpdf",
+    title="this1",
+    filetypes=(
+      ("PDF Files", "*.pdf"),
+      ("All Files", "*.*"))) 
+                                    # Check to see if there is a file
+  if open_file:
+                                      # Open the pdf file
+    pdf_file = PyPDF2.PdfFileReader(open_file)
+                                      # Set the page to read
+    page = pdf_file.getPage(0)
+                                      # Extract the text from the pdf file
+    page_stuff = page.extractText()
+
+                                       #  Add text to textbox
+    my_text.insert(1.0, page_stuff)
+
+                                        #Create A Menu
+my_menu = Menu(my_frame2)
+root.config(menu=my_menu)
+
+                                         # Add some dropdown menus
+file_menu = Menu(my_menu, tearoff=False)
+
+my_menu.add_cascade(label="File", menu=file_menu)
+file_menu.add_command(label="Open", command=open_pdf)
+file_menu.add_command(label="Clear", command=clear_text_box)
+file_menu.add_separator()
+
+file_menu.add_command(label="Exit", command=root.destroy)
+
+
+def nump():
+
+  fileN = filedialog.askopenfilename(initialdir="E:\Mithun\Programming\Python\Tkinter\redpdf",
+                                          title="Select a File",
+                                          filetypes=(("Text files",
+                                                      "*.pdf*"),
+                                                     ("all files",
+                                                      "*.*")))
+  pdfReader = PyPDF2.PdfFileReader(fileN)
+                                         #no th of page
+  from_page = pdfReader.getPage(int_num)
+  LN = pdfReader.getNumPages()
+
+                                        #extracting the text from PDF
+  text = from_page.extractText()
+                                        #reading the txt
+  speak = pyttsx3.init()
+  speak.say(text)
+  speak.runAndWait()
+
+
+Eentry = Entry(my_frame1)
+Eentry.place(x=80, y=470)
+Eentry.insert(0, "")
+Eentry = IntVar()
+num = Eentry.get()
+int_num = int(num)
+Elabel = Label(my_frame1, text="Page no:",bg="#4a8577")
+Elabel.place(x=10,y=470)
+subtton = Button(my_frame1,text="GO", command=nump).place(x=210,y=470)
+
+                                                                       #2nd Tab  end here
+                                                                       #tab 3
+
+label = Label(my_frame3, text="Text to Speech",bg="lightgrey",font="bold, 20", pady=40).pack()
+entry = Entry(my_frame3, width=35, bd=3, font=14)
+
+entry.place(x=90, y=80)
+entry.insert(0, "")
+
+
+
+def play():
+	  myobj = gTTS(text=entry.get(), lang=v, slow=False)
+	  
+	  myobj.save("convert.wav")
+	  os.system("convert.wav")
+
+btn = Button(my_frame3, text="SUBMIT",
+
+             width="15", pady=10,font="bold, 15", command=play, bg='yellow')
+btn.place(x=170, y=190)
+
+
+
+style = ttk.Style()
+style.configure("my_notebook.Tab", foreground="black", background="white")
+
+my_button3 = Button(my_frame1, text=">>", command=switch)
+my_button3.place(x=400, y=450)
+my_button4 = Button(my_frame2, text=">>", command=switch1)
+my_button4.place(x=400, y=450)
+
+my_button_4 = Button(my_frame2, text="<<", command=switch2)
+my_button_4.place(x=100, y=450)
+my_button_5 = Button(my_frame3, text="<<", command=switch)
+my_button_5.place(x=100, y=450)
+
+my_button5 = Button(my_frame3, text=">>", state=DISABLED)
+my_button5.place(x=400, y=450)
+
+root.mainloop()
