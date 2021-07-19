@@ -13,9 +13,7 @@ class Pdf_audio(object):
         self.root = parent
         self.root.title("PDF to Audio")
         self.frame = Tk.Frame(parent)
-        self.frame.pack()
-
-        
+        self.frame.pack() 
 
 
     def switch(self):
@@ -170,10 +168,10 @@ if __name__ == "__main__":
     for  k,v in langs.items():
 
         print(v)
-        button_R = Tk.Radiobutton(my_frame1,text=k,value=v, variable=var, bg='#4a8577',command=app.sel)
+        button_R = Tk.Radiobutton(my_frame1,text=k,value=v, variable=var, highlightthickness=0, bd=0, bg='#4a8577',command=app.sel)
         button_R.pack(anchor=Tk.W)
         
-        button_R1 = Tk.Radiobutton(my_frame3,text=k,value=v, variable=var, bg='lightgrey',command=app.sel)
+        button_R1 = Tk.Radiobutton(my_frame3,text=k,value=v, variable=var,highlightthickness=0, bd=0, bg='lightgrey',command=app.sel)
         button_R1.pack(anchor=Tk.W)
 
 
