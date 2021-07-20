@@ -145,7 +145,7 @@ if __name__ == "__main__":
     photo = Tk.PhotoImage(file="download.png")
                                                            #
     lbl = Tk.Label(my_frame1, image=photo, bg="#4a8577")
-    lbl.place(relx=0.5, rely=0.39, anchor='center')
+    lbl.place(relx=0.5, rely=0.36, anchor='center')
 
     canvas.create_text(200, 100, text=" PDF TO AUDIO ",anchor='center', fill="#0f1020", font=("Times New Roman", 25, "bold"))
     canvas.pack()
@@ -164,6 +164,7 @@ if __name__ == "__main__":
 
     langs = {'English':'en', 'Hindi':'hi-IN', 'French':'fr-FR','Italian':'it-IT','Japanese':'ja-JP','Kannada':'kn-IN','Malyalam':'ml-IN','Spanish':'es-US'}
     var = Tk.StringVar(value="1")
+    var1 = Tk.StringVar(value="1")
 
     for  k,v in langs.items():
 
@@ -171,7 +172,8 @@ if __name__ == "__main__":
         button_R = Tk.Radiobutton(my_frame1,text=k,value=v, variable=var, highlightthickness=0, bd=0, bg='#4a8577',command=app.sel)
         button_R.pack(anchor=Tk.W)
         
-        button_R1 = Tk.Radiobutton(my_frame3,text=k,value=v, variable=var,highlightthickness=0, bd=0, bg='lightgrey',command=app.sel)
+    for  k1,v1 in langs.items():   
+        button_R1 = Tk.Radiobutton(my_frame3,text=k1,value=v1, variable=var1,highlightthickness=0, bd=0, bg='lightgrey',command=app.sel)
         button_R1.pack(anchor=Tk.W)
 
 
@@ -203,21 +205,21 @@ if __name__ == "__main__":
     int_num = int(num)
     Elabel = Tk.Label(my_frame1, text="Page no:",bg="#4a8577")
     Elabel.place(x=10,y=470)
-    subtton = Tk.Button(my_frame1,text="GO", command=app.nump).place(x=210,y=470)
+    subtton = Tk.Button(my_frame1,text="GO", command=app.nump).place(x=250,y=465)
 
                                                                            #2nd Tab  end here
                                                                            #tab 3
 
-    label = Tk.Label(my_frame3, text="Text to Speech",bg="lightgrey",font="bold, 20", pady=40).pack()
-    entry = Tk.Entry(my_frame3, width=35, bd=3, font=14)
+    label = Tk.Label(my_frame3, text="Text to Speech",bg="lightgrey",font="bold, 20").place(x=150, y=30)
 
-    entry.place(x=90, y=80)
+    entry = Tk.Entry(my_frame3, width=33, bd=2, font=14)
+    entry.place(x=100, y=90)
     entry.insert(0, "")
 
     btn = Tk.Button(my_frame3, text="SUBMIT",
 
              width="15", pady=10,font="bold, 15", command=app.play, bg='yellow')
-    btn.place(x=170, y=190)
+    btn.place(x=160, y=180)
 
 
 
