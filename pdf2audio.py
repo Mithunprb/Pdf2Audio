@@ -116,7 +116,7 @@ if __name__ == "__main__":
     root = Tk.Tk()
     
     app = Pdf_audio(root)
-    icon = Tk.PhotoImage(file='/home/mithun/Mithun/Programming/Python/Tkinter/Audio/pdf2audio/icon.png')
+    icon = Tk.PhotoImage(file='./icon.png')
     root.iconphoto(False, icon)
 
 
@@ -132,7 +132,7 @@ if __name__ == "__main__":
     my_notebook.add(my_frame3, text="3rd Tab")
 
     canvas = Tk.Canvas(my_frame1, bg="#4a8577", bd=0, highlightthickness=0)
-    photo = Tk.PhotoImage(file="/home/mithun/Mithun/Programming/Python/Tkinter/Audio/pdf2audio/download.png")
+    photo = Tk.PhotoImage(file="./download.png")
                                                            #
     lbl = Tk.Label(my_frame1, image=photo, bg="#4a8577")
     lbl.place(relx=0.5, rely=0.36, anchor='center')
