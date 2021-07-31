@@ -34,17 +34,18 @@ class Pdf_audio(object):
     def sel(self):
         print("You selected " + str(var.get()))
 
-        
-    def audio_maker(self):
-
-        filename = filedialog.askopenfilename(initialdir="/home/mithun/Mithun/Books",
+    def open_file(self):
+         filename = filedialog.askopenfilename(initialdir="/home/mithun/Mithun/Books",
                                               title="Select a File",
                                               filetypes=(("Text files",
                                                           "*.pdf*"),
                                                          ("all files",
                                                           "*.*")))
-        print(filename)
-        pdfFileObj = Tk.open(filename, "rb")
+         self.filename = filename 
+    def audio_maker(self):
+        self.open_file()
+        print(self.filename)
+        pdfFileObj = open(self.filename, "rb")
         pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
 
         mytext = ""
@@ -66,22 +67,16 @@ class Pdf_audio(object):
                                           # Clear the textbox
 
     def clear_text_box(self):
-        my_text .delete(1.0, END)
+        my_text .delete(1.0, Tk.END)
 
                                         # Open our pdf file
     def open_pdf(self):
                                  # Grab the filename of the pdf file
-        global open_file
-        open_file = filedialog.askopenfilename(
-        initialdir="/home/mithun/Mithun/Books",
-        title="this1",
-        filetypes=(
-          ("PDF Files", "*.pdf"),
-          ("All Files", "*.*"))) 
+        self.open_file()
                                         # Check to see if there is a file
-        if open_file:
+        if self.filename:
                                           # Open the pdf file
-            pdf_file = PyPDF2.PdfFileReader(open_file)
+            pdf_file = PyPDF2.PdfFileReader(self.filename)
                                               # Set the page to read
             page = pdf_file.getPage(0)
                                               # Extract the text from the pdf file
@@ -95,13 +90,8 @@ class Pdf_audio(object):
 
     def nump(self):
 
-      fileN = filedialog.askopenfilename(initialdir="/home/mithun/Mithun/Books",
-                                              title="Select a File",
-                                              filetypes=(("Text files",
-                                                          "*.pdf*"),
-                                                         ("all files",
-                                                          "*.*")))
-      pdfReader = PyPDF2.PdfFileReader(fileN)
+      self.open_file()
+      pdfReader = PyPDF2.PdfFileReader(self.filename)
                                              #no th of page
       from_page = pdfReader.getPage(int_num)
       LN = pdfReader.getNumPages()
@@ -126,7 +116,7 @@ if __name__ == "__main__":
     root = Tk.Tk()
     
     app = Pdf_audio(root)
-    icon = Tk.PhotoImage(file='icon.png')
+    icon = Tk.PhotoImage(file='/home/mithun/Mithun/Programming/Python/Tkinter/Audio/pdf2audio/icon.png')
     root.iconphoto(False, icon)
 
 
@@ -142,7 +132,7 @@ if __name__ == "__main__":
     my_notebook.add(my_frame3, text="3rd Tab")
 
     canvas = Tk.Canvas(my_frame1, bg="#4a8577", bd=0, highlightthickness=0)
-    photo = Tk.PhotoImage(file="download.png")
+    photo = Tk.PhotoImage(file="/home/mithun/Mithun/Programming/Python/Tkinter/Audio/pdf2audio/download.png")
                                                            #
     lbl = Tk.Label(my_frame1, image=photo, bg="#4a8577")
     lbl.place(relx=0.5, rely=0.36, anchor='center')
