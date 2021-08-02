@@ -1,4 +1,5 @@
-#!usr/bin/python
+#!/usr/bin/env python
+#!/bin/sh
 import tkinter as Tk
 from tkinter import ttk
 import PyPDF2
@@ -33,6 +34,8 @@ class Pdf_audio(object):
   
     def sel(self):
         print("You selected " + str(var.get()))
+    def sel1(self):
+        print("You selected " + str(var1.get()))
 
     def open_file(self):
          filename = filedialog.askopenfilename(initialdir="/home/mithun/Mithun/Books",
@@ -56,7 +59,7 @@ class Pdf_audio(object):
 
             mytext += pageObj.extractText()
 
-            myobj1 = gTTS(text=mytext, lang=str(var.get()))
+            myobj1 = gTTS(text=mytext, lang=str(v1))
             myobj1.save(qpath)
             os.system(qpath)
 
@@ -106,17 +109,17 @@ class Pdf_audio(object):
     
 
     def play(self):
-          myobj = gTTS(text=entry.get(), lang=v, slow=False)
+          myobj = gTTS(text=entry.get(), lang=v1, slow=False)
           
-          myobj.save("convert.wav")
-          os.system("convert.wav")
+          myobj.save("/home/mithun/Mithun/Programming/Python/Tkinter/Audio/pdf2audio/convert.mp3")
+          os.system("/home/mithun/Mithun/Programming/Python/Tkinter/Audio/pdf2audio/convert.mp3")
 
 
 if __name__ == "__main__":
     root = Tk.Tk()
     
     app = Pdf_audio(root)
-    icon = Tk.PhotoImage(file='./icon.png')
+    icon = Tk.PhotoImage(file='/home/mithun/Mithun/Programming/Python/Tkinter/Audio/pdf2audio/icon.png')
     root.iconphoto(False, icon)
 
 
@@ -132,7 +135,7 @@ if __name__ == "__main__":
     my_notebook.add(my_frame3, text="3rd Tab")
 
     canvas = Tk.Canvas(my_frame1, bg="#4a8577", bd=0, highlightthickness=0)
-    photo = Tk.PhotoImage(file="./download.png")
+    photo = Tk.PhotoImage(file="/home/mithun/Mithun/Programming/Python/Tkinter/Audio/pdf2audio/download.png")
                                                            #
     lbl = Tk.Label(my_frame1, image=photo, bg="#4a8577")
     lbl.place(relx=0.5, rely=0.36, anchor='center')
@@ -140,7 +143,7 @@ if __name__ == "__main__":
     canvas.create_text(200, 100, text=" PDF TO AUDIO ",anchor='center', fill="#0f1020", font=("Times New Roman", 25, "bold"))
     canvas.pack()
 
-    btn2 = Tk.Button(my_frame1,text="Pdf to audio", width="15", command=app.audio_maker)
+    btn2 = Tk.Button(my_frame1,text="Pdf to audio", highlightthickness=0, bd=0, bg="#3B6A5D",fg="#f0f0f0", width="15", command=app.audio_maker)
     btn2.place(x=200, y=270)
 
                 # From here Tab2 code
@@ -163,7 +166,7 @@ if __name__ == "__main__":
         button_R.pack(anchor=Tk.W)
         
     for  k1,v1 in langs.items():   
-        button_R1 = Tk.Radiobutton(my_frame3,text=k1,value=v1, variable=var1,highlightthickness=0, bd=0, bg='lightgrey',command=app.sel)
+        button_R1 = Tk.Radiobutton(my_frame3,text=k1,value=v1, variable=var1,highlightthickness=0, bd=0, bg='lightgrey',command=app.sel1)
         button_R1.pack(anchor=Tk.W)
 
 
@@ -195,7 +198,7 @@ if __name__ == "__main__":
     int_num = int(num)
     Elabel = Tk.Label(my_frame1, text="Page no:",bg="#4a8577")
     Elabel.place(x=10,y=470)
-    subtton = Tk.Button(my_frame1,text="GO", command=app.nump).place(x=250,y=465)
+    subtton = Tk.Button(my_frame1,text="GO", highlightthickness=0, bd=0, bg="#3B6A5D", command=app.nump).place(x=250,y=465)
 
                                                                            #2nd Tab  end here
                                                                            #tab 3
@@ -216,17 +219,17 @@ if __name__ == "__main__":
     style = ttk.Style()
     style.configure("my_notebook.Tab", foreground="black", background="white")
 
-    my_button3 = Tk.Button(my_frame1, text=">>", command=app.switch)
+    my_button3 = Tk.Button(my_frame1 , bg="#4a8577",fg="#fff", highlightthickness=0, bd=0,text=">>", command=app.switch)
     my_button3.place(x=400, y=450)
-    my_button4 = Tk.Button(my_frame2, text=">>", command=app.switch1)
+    my_button4 = Tk.Button(my_frame2, text=">>", bg="#f0f0f0", fg="#0b0b0b", highlightthickness=0, bd=0, command=app.switch1)
     my_button4.place(x=400, y=450)
 
-    my_button_4 = Tk.Button(my_frame2, text="<<", command=app.switch2)
+    my_button_4 = Tk.Button(my_frame2, text="<<",  bg="#f0f0f0", fg="#0b0b0b", highlightthickness=0, bd=0, command=app.switch2)
     my_button_4.place(x=100, y=450)
-    my_button_5 = Tk.Button(my_frame3, text="<<", command=app.switch)
+    my_button_5 = Tk.Button(my_frame3, text="<<", fg="grey", command=app.switch)
     my_button_5.place(x=100, y=450)
 
-    my_button5 = Tk.Button(my_frame3, text=">>", state=Tk.DISABLED)
+    my_button5 = Tk.Button(my_frame3, text=">>", fg="lightgrey", state=Tk.DISABLED)
     my_button5.place(x=400, y=450)
 
 
