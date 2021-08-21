@@ -1,4 +1,6 @@
 # PdfAloud
+>Python GUI using Tkinter for converting pdf text to audio
+>with the help of gtts text to speech<br>
 - ### Requirements
 - Using virtual environment
 -  For windows and Linux/Mac os(Use pip3 or accordingly)
@@ -7,8 +9,7 @@
     ```
     [requirement.txt](./requirement.txt)
     
->Python GUI using Tkinter for converting pdf text to audio
->with the help of gtts text to speech<br>
+
 ><br>
 
 **What's New**
