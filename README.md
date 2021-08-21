@@ -1,6 +1,4 @@
 # PdfAloud
-- ##  Pdf to text
-- ###  Text to speech
 - ### Requirements
 - Using virtual environment
 -  For windows and Linux/Mac os(Use pip3 or accordingly)
