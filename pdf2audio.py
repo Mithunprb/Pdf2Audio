@@ -114,8 +114,7 @@ class Pdf_audio(object):
           myobj.save("/home/mithun/Mithun/Programming/Python/Tkinter/Audio/pdf2audio/convert.mp3")
           os.system("/home/mithun/Mithun/Programming/Python/Tkinter/Audio/pdf2audio/convert.mp3")
 
-
-if __name__ == "__main__":
+def main():
     root = Tk.Tk()
     
     app = Pdf_audio(root)
@@ -234,3 +233,8 @@ if __name__ == "__main__":
 
 
     root.mainloop()
+
+    
+if __name__ == "__main__":
+    main()
+    
